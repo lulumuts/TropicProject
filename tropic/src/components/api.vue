@@ -1,7 +1,8 @@
 <template>
   <div>
     <h1>TO DO'S</h1>
-    <div v-for="item in todos" :key="item.id">
+    <input v-model="search" />
+    <div v-for="item in searchFilter" :key="item.id">
       {{ item }}
     </div>
   </div>
@@ -13,18 +14,25 @@ export default {
   data() {
     return {
       todos: [],
+      search: "",
     };
+  },
+  computed: {
+    searchFilter() {
+      return this.todos.filter((x) => {
+        return x.title.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
   },
   mounted() {
     this.allData();
   },
   methods: {
-    async allData() {
-      await this.axios
+    allData() {
+      this.axios
         .get("https://jsonplaceholder.typicode.com/todos")
         .then((response) => {
           this.todos = response.data;
-          console.log(response.data);
         });
     },
   },
