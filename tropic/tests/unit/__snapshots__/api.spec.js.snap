@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`api.vue renders snapshot when list is not empty 1`] = `
+<div>
+  <h1 />
+  <input />
+  
+  
+</div>
+`;
+
+exports[`api.vue returns the details of the first user 1`] = `
+<div>
+  <h1 />
+  <input />
+  
+  
+</div>
+`;

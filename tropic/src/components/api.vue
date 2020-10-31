@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>TO DO'S</h1>
+    <h1>{{ msg }}</h1>
     <input v-model="search" />
     <div v-for="item in searchFilter" :key="item.id">
       {{ item }}
@@ -11,6 +11,7 @@
 <script>
 export default {
   name: "api",
+  props: { msg: String },
   data() {
     return {
       todos: [],
@@ -28,12 +29,15 @@ export default {
     this.allData();
   },
   methods: {
-    allData() {
-      this.axios
-        .get("https://jsonplaceholder.typicode.com/todos")
-        .then((response) => {
-          this.todos = response.data;
-        });
+    async allData() {
+      try {
+        const response = await this.axios.get(
+          "https://jsonplaceholder.typicode.com/todos"
+        );
+        return (this.todos = response.data);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
