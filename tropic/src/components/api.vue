@@ -1,13 +1,10 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <input
-      v-model="searchUser"
-      class="searchBar"
-      placeholder="Search for a Company or Name"
-    />
 
-    <ul class="flex-container wrap">
+    <input v-model="searchUser" class="searchBar" placeholder="Search for a Company or Name" />
+
+    <ul class="flex-container wrap no-margin">
       <div v-for="item in filterUsers" :key="item.id">
         <div class="user">
           <div>
@@ -15,57 +12,39 @@
             <p class="subtitle">{{ item.company.catchPhrase }}</p>
 
             <p>
-              <strong>Name:</strong><br />
+              <strong>Name:</strong>
+              <br />
               {{ item.name }}
             </p>
             <p>
-              <strong>Username:</strong><br />
+              <strong>Username:</strong>
+              <br />
               {{ item.username }}
             </p>
             <p>
-              <strong>Email:</strong><br />
+              <strong>Email:</strong>
+              <br />
               {{ item.email }}
             </p>
             <p>
-              <strong>Phone:</strong><br />
+              <strong>Phone:</strong>
+              <br />
               {{ item.phone }}
             </p>
             <p>
-              <strong>Website:</strong><br />
+              <strong>Website:</strong>
+              <br />
               {{ item.website }}
             </p>
           </div>
         </div>
       </div>
     </ul>
-    <input
-      v-model="search"
-      class="searchBar"
-      placeholder="Search for a post"
-    /><br />
-    <div class="flex-container wrap completed no-margin">
-      <button>
-        <input
-          type="checkbox"
-          class="hidden"
-          id="checkbox"
-          :value="false"
-          v-model="checked"
-        />
-        <label for="checkbox">Post completed</label>
-      </button>
-      <br />
-      <button>
-        <input
-          type="checkbox"
-          class="hidden"
-          id="checkbox"
-          :value="true"
-          v-model="checked"
-        />
-        <label for="checkbox">Post not completed</label>
-      </button>
-    </div>
+    <h1>Posts</h1>
+
+    <input v-model="search" class="searchBar" placeholder="Search for a post" />
+    <br />
+
     <div class="flex-container wrap no-margin">
       <div v-for="item in users" :key="item.id">
         <div class="user-button">
@@ -73,7 +52,8 @@
             <button class="userIdButton" @click="userId = item.id">
               <p>
                 <strong>ID:</strong>
-                {{ item.id }}<br />
+                {{ item.id }}
+                <br />
                 <strong>Name:</strong>
                 {{ item.name }}
               </p>
@@ -82,19 +62,39 @@
         </div>
       </div>
     </div>
+    <div class="flex-container wrap completed no-margin">
+      <button>
+        <input type="checkbox" class="hidden" id="checkbox" :value="false" v-model="checked" />
+        <label for="checkbox">Post completed</label>
+      </button>
+      <br />
+      <button>
+        <input type="checkbox" class="hidden" id="checkbox" :value="true" v-model="checked" />
+        <label for="checkbox">Post not completed</label>
+      </button>
+    </div>
     <br />
 
     <ul class="flex-container wrap no-margin">
       <div v-for="item in filterTodos" :key="item.id">
-        <div
-          :class="{ highlight: item.id == selected }"
-          @click="selected = item.id"
-        >
+        <div :class="{ highlight: item.id == selected }" @click="selected = item.id">
           <div class="item">
-            <p><strong>UserId:</strong> {{ item.userId }}</p>
-            <p><strong>postId:</strong> {{ item.id }}</p>
-            <p><strong>title:</strong> {{ item.title }}</p>
-            <p><strong>Completed:</strong> {{ item.completed }}</p>
+            <p>
+              <strong>UserId:</strong>
+              {{ item.userId }}
+            </p>
+            <p>
+              <strong>postId:</strong>
+              {{ item.id }}
+            </p>
+            <p>
+              <strong>title:</strong>
+              {{ item.title }}
+            </p>
+            <p>
+              <strong>Completed:</strong>
+              {{ item.completed }}
+            </p>
           </div>
         </div>
       </div>
@@ -114,13 +114,13 @@ export default {
       searchUser: "",
       checked: false,
       selected: [],
-      userId: 1,
+      userId: 1
     };
   },
   computed: {
     filterTodos: function() {
       console.log(this.userId);
-      return this.todos.filter((x) => {
+      return this.todos.filter(x => {
         return (
           x.title.toLowerCase().includes(this.search.toLowerCase()) &&
           x.completed === this.checked &&
@@ -131,7 +131,7 @@ export default {
 
     filterUsers: function() {
       return this.filterUsersBySearch();
-    },
+    }
   },
   mounted() {
     this.getAllData();
@@ -165,17 +165,29 @@ export default {
     },
 
     filterUsersBySearch() {
-      return this.users.filter((x) => {
+      return this.users.filter(x => {
         return (
           x.name.toLowerCase().includes(this.searchUser.toLowerCase()) ||
           x.company.name.toLowerCase().includes(this.searchUser.toLowerCase())
         );
       });
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
+body {
+  font-family: "Raleway", sans-serif;
+}
+h1 {
+  text-align: left;
+  margin: 120px 7%;
+  font-size: 110px;
+  opacity: 0.25;
+  font-weight: 700;
+}
+
 .highlight {
   background-color: yellow;
 }
@@ -203,6 +215,7 @@ export default {
   width: 85vw;
   height: 50px;
   border-radius: 5px;
+  font-family: "Raleway", sans-serif;
   border: 1.75px solid #eaeaea;
   font-size: 20px;
   padding: 0 10px;
@@ -216,13 +229,17 @@ input[type="checkbox"].hidden {
   margin: 100px;
 }
 label {
-  font-size: 20px;
+  font-size: 18px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #172d15;
 }
 .completed button {
-  margin: 0 20px;
-  height: 80px;
+  margin: 10px 20px;
+  height: 40px;
   width: 200px;
   border-radius: 10px;
+  font-family: "Raleway", sans-serif;
   border: none;
   cursor: pointer;
 }
@@ -275,7 +292,7 @@ h3 {
 .userIdButton {
   background: none;
   text-align: left;
-  width: 200px;
+  width: auto;
   border: none;
   border-radius: 5px;
   cursor: pointer;

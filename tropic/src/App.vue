@@ -1,24 +1,21 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App" /> -->
-  <api msg="To do's List" />
+  <api msg="Users" />
 </template>
 
 <script>
-// import HelloWorld from "./components/HelloWorld.vue";
 import api from "./components/api.vue";
 export default {
   name: "App",
   components: {
-    // HelloWorld,
-    api,
-  },
+    api
+  }
 };
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap");
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Raleway", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
