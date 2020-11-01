@@ -1,8 +1,14 @@
 <template>
   <div>
+    <!-- title being served from app.vue -->
+
     <h1>{{ msg }}</h1>
 
+    <!-- search bar for users where you can search by Company Name or User Name-->
+
     <input v-model="searchUser" class="searchBar" placeholder="Search for a Company or Name" />
+
+    <!-- for loop for users data-->
 
     <ul class="flex-container wrap no-margin">
       <div v-for="item in filterUsers" :key="item.id">
@@ -40,11 +46,12 @@
         </div>
       </div>
     </ul>
-    <h1>Posts</h1>
 
+    <h1>Posts</h1>
+    <!-- Search Bar for Posts data where you can search by title -->
     <input v-model="search" class="searchBar" placeholder="Search for a post" />
     <br />
-
+    <!-- For loop for users data, here is used to filter posts data below -->
     <div class="flex-container wrap no-margin">
       <div v-for="item in users" :key="item.id">
         <div class="user-button">
@@ -62,6 +69,7 @@
         </div>
       </div>
     </div>
+    <!-- filter whether posts are completed or not -->
     <div class="flex-container wrap completed no-margin">
       <button>
         <input type="checkbox" class="hidden" id="checkbox" :value="false" v-model="checked" />
@@ -74,7 +82,7 @@
       </button>
     </div>
     <br />
-
+    <!-- for loop for posts data -->
     <ul class="flex-container wrap no-margin">
       <div v-for="item in filterTodos" :key="item.id">
         <div :class="{ highlight: item.id == selected }" @click="selected = item.id">
@@ -118,6 +126,7 @@ export default {
     };
   },
   computed: {
+    // function reacts to any change in the search bars, the completed filters, and the userId filter
     filterTodos: function() {
       console.log(this.userId);
       return this.todos.filter(x => {
@@ -128,16 +137,18 @@ export default {
         );
       });
     },
-
+    // function filters the users search bar
     filterUsers: function() {
       return this.filterUsersBySearch();
     }
   },
   mounted() {
+    // calls get functions on mount to be available once page is loaded
     this.getAllData();
     this.getAllUsers();
   },
   methods: {
+    // calls user data
     async getAllUsers() {
       try {
         const response = await this.axios.get(
@@ -148,6 +159,7 @@ export default {
         console.log(error);
       }
     },
+    // calls all posts data
     async getAllData() {
       try {
         const response = await this.axios.get(
@@ -158,12 +170,13 @@ export default {
         console.log(error);
       }
     },
+    // assigns change to userId on click
     filterById(y) {
       if (this.userId !== null) {
         return this.userId === y;
       }
     },
-
+    // filters users through the search bar, which is return on computed
     filterUsersBySearch() {
       return this.users.filter(x => {
         return (
