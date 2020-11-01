@@ -33,8 +33,9 @@ describe("api.vue", () => {
     const wrapper = shallowMount(api, { todos });
     expect(wrapper.element).toMatchSnapshot();
   });
+  // with jest uses a mock value to test the api vs making a real request
 
-  it("returns the data", async () => {
+  it("returns the api data", async () => {
     axios.get.mockResolvedValue({
       data: [
         {
